@@ -1,6 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 // import HelloWorld from "./components/HelloWorld.vue";
+import { useStore } from "@/stores";
+const store = useStore();
 </script>
 
 <template>
@@ -11,6 +13,8 @@ import { RouterLink, RouterView } from "vue-router";
         <RouterLink to="/about" class="px-1">About</RouterLink>
     </nav>
     <RouterView />
+
+    <div class="store">{{ store.hello }}</div>
 </template>
 
 <style scoped></style>
