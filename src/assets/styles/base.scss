@@ -1,0 +1,35 @@
+:root {
+    --main: #fff;
+    --accent: limegreen;
+    --bg-main: #141414;
+    --bs-breakpoint-md: 768px;
+}
+$bg-main: #141414;
+body {
+    background: var(--bg-main);
+    color: var(--main);
+    font-size: 16px;
+    line-height: 100%;
+}
+.wrapper {
+    min-height: 100vh;
+}
+img {
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s all ease;
+    &:hover,
+    &:focus {
+        color: var(--accent);
+        /* opacity: 0.7; */
+    }
+}
