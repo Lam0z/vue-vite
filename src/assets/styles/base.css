@@ -1,11 +1,10 @@
-:root {
-    --main: #fff;
-    --bg-main: #141414;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
 }
+
 body {
-    background: var(--bg-main);
-    color: var(--main);
-}
-.wrapper {
-    min-height: 100vh;
 }

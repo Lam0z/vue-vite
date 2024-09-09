@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-    <div></div>
+    <section>MyComponent</section>
 </template>
 
 <style lang="scss" scoped></style>
