@@ -1,22 +1,27 @@
 <script setup>
 import { ref } from "vue";
+import { useMoviesStore } from "@/stores/counter";
+import Films from "../components/Films.vue";
+import TheLayout from "../components/TheLayout.vue";
 import { FILMS } from "@/constants";
 
-import MyComponent from "../components/MyComponent.vue";
-import TheLayout from "../components/TheLayout.vue";
-
-// const films = ref({});
-
-// async function getData(target) {
-//     const response = await fetch(api, options);
-//     const data = await response.json();
-//     films.value = data.docs;
-//     console.log(data);
-// }
+const moviesStore = useMoviesStore();
+const filmQuery = ref("spider");
+const getFilms = () => {
+    moviesStore.getFilms(filmQuery.value);
+};
+const filmId = (id) => {
+    moviesStore.getFilmId(id);
+};
 </script>
 
 <template>
     <the-layout>
-        <MyComponent :films="FILMS" />
+        <Films
+            :films="moviesStore.films"
+            v-model="filmQuery"
+            @get-movies="getFilms"
+            @get-movie-id="filmId"
+        />
     </the-layout>
 </template>

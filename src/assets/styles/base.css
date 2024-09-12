@@ -1,3 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+    --color: white;
+    --second-color: #eef5ff;
+    --text-color: #365383;
+    --color-success: #54d334;
+    --title-color: #336cfb;
+    --transition: 0.3s all ease;
+}
+
 *,
 *::before,
 *::after {
@@ -7,10 +18,40 @@
 }
 
 body {
+    background: var(--color);
+    font-size: 16px;
+    line-height: 100%;
+    color: var(--text-color);
+    font-family: "Montserrat Alternates", system-ui;
+    font-style: normal;
+    font-weight: 500;
+
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+#app {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    /* width: 100%; */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+a {
+    color: inherit;
+    text-decoration: none;
 }
 img {
     width: 100%;
     max-width: 100%;
-    /* max-height: 300px; */
     object-fit: cover;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
