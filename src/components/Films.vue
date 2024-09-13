@@ -1,9 +1,13 @@
 <script setup>
 const emit = defineEmits(["getMovies", "getMovieId"]);
 const film = defineModel();
+import pl from "@/assets/img/pl.jpg";
 const props = defineProps({
     films: {
         type: Object,
+    },
+    error: {
+        type: String,
     },
 });
 const getMovie = (e) => {
@@ -20,13 +24,17 @@ const getId = (id) => {
             <button class="films__search-btn" @click="getMovie">Search</button>
         </div>
 
-        <div class="container films__container" v-if="films.length">
+        <div class="container films__container" v-if="!error">
             <RouterLink
                 :to="`/film/${item.id}`"
                 v-for="(item, key) in films"
                 :key="item.id"
                 class="films__item"
-                :style="`background-image:url(${item.poster.url})`"
+                :style="[
+                    item.poster.url
+                        ? `background-image:url(${item.poster.url})`
+                        : `background-image:url(${pl})`,
+                ]"
                 @click="getId(item.id)"
             >
                 <div
@@ -43,12 +51,21 @@ const getId = (id) => {
                 </div>
             </RouterLink>
         </div>
+
+        <div class="container container--error" v-else>
+            <div class="message">
+                <div>{{ error }}</div>
+                <span class="loader"></span>
+            </div>
+        </div>
     </section>
 </template>
 
 <style lang="scss" scoped>
 .films {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     &__container {
         height: 100%;
         display: grid;
@@ -114,6 +131,10 @@ const getId = (id) => {
         background-size: cover;
         background-position: center;
         position: relative;
+        transition: var(--transition);
+        &:hover {
+            // background-size: 105% 105%;
+        }
         &:hover .films__info {
             display: flex;
             top: 0;

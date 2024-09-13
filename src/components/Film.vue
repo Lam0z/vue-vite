@@ -1,5 +1,8 @@
 <script setup>
 import { useMoviesStore } from "@/stores/counter";
+import pl from "@/assets/img/pl.jpg";
+import { ref } from "vue";
+const emit = defineEmits(["addWatch"]);
 const moviesStore = useMoviesStore();
 const props = defineProps({
     film: {
@@ -8,20 +11,32 @@ const props = defineProps({
     filmId: {
         type: Number,
     },
+    error: {
+        type: String,
+    },
 });
-import { FILM } from "@/constants";
-import { useRoute } from "vue-router";
-import { ref } from "vue";
+
+const addToWatch = (id) => {
+    emit("addWatch", id);
+};
 </script>
 <template>
     <section
         class="film"
-        :style="`background-image:url(${film.backdrop?.url})`"
+        :style="[`background-image:url(${film.backdrop.url})`]"
+        v-if="!error"
     >
         <div class="container">
             <div class="film__container">
                 <div class="film__preview">
-                    <img :src="film.poster.url" alt="" />
+                    <img :src="film.poster.url" alt="" v-if="film.poster.url" />
+                    <img :src="pl" alt="" v-else />
+                    <button
+                        class="film__preview-btn"
+                        @click="addToWatch(film.id)"
+                    >
+                        <span> Watch </span>
+                    </button>
                 </div>
                 <div class="film__info">
                     <div class="film__name">
@@ -36,14 +51,27 @@ import { ref } from "vue";
                     </div>
                     <div class="film__info-item film__countries">
                         <span>Страны: </span>
-                        <div v-for="country in film.countries">
-                            {{ country.name }}
+                        <div>
+                            <div
+                                v-for="country in film.countries"
+                                class="film__countrie"
+                            >
+                                {{ country.name }}
+                            </div>
                         </div>
                     </div>
-                    <div class="film__info-item film__rating">
+                    <!-- <div
+                        class="film__info-item film__rating"
+                        v-if="film.premiere.country"
+                    >
                         <span>Премьера:</span>
-                        <span>{{ film.premiere.world.split("T")[0] }}</span>
-                    </div>
+                        <span v-if="film.premiere.world">{{
+                            film.premiere.world.split("T")[0]
+                        }}</span>
+                        <span v-else="film.premiere.russia">{{
+                            film.premiere.russia.split("T")[0]
+                        }}</span>
+                    </div> -->
                     <div class="film__info-item film__rating">
                         <span>Возрастной рейтинг: </span
                         ><span>{{ film.ageRating }}+</span>
@@ -53,6 +81,12 @@ import { ref } from "vue";
             </div>
         </div>
     </section>
+    <div class="container container--error" v-else>
+        <div class="message">
+            <div>{{ error }}</div>
+            <span class="loader"></span>
+        </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -76,11 +110,26 @@ import { ref } from "vue";
     }
 
     &__preview {
+        display: flex;
+        flex-direction: column;
         img {
+            height: 100%;
             border-radius: 1rem;
         }
     }
-
+    &__preview-btn {
+        margin-top: 1rem;
+        display: block;
+        width: 100%;
+        background: var(--title-color);
+        outline: none;
+        border: none;
+        padding: 1rem;
+        color: var(--color);
+        text-transform: uppercase;
+        font-family: inherit;
+        border-radius: 0.5rem;
+    }
     &__info {
         display: grid;
         row-gap: 1rem;
@@ -116,6 +165,12 @@ import { ref } from "vue";
     }
 
     &__countries {
+    }
+    &__countrie {
+        margin-bottom: 0.5rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     &__description {

@@ -8,10 +8,14 @@
                 </div>
                 <nav class="nav header__nav">
                     <div class="header__nav-item">
-                        <a href="#" class="header__nav-link">Main</a>
+                        <RouterLink to="/" class="header__nav-link"
+                            >Main</RouterLink
+                        >
                     </div>
                     <div class="header__nav-item">
-                        <a href="#" class="header__nav-link">My films</a>
+                        <RouterLink to="/my-films" class="header__nav-link"
+                            >My films</RouterLink
+                        >
                     </div>
                 </nav>
                 <div class="profile header__profile">
