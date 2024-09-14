@@ -1,10 +1,17 @@
-<script setup></script>
+<script setup>
+import TheHeader from "./TheHeader.vue";
+import TheFooter from "./TheFooter.vue";
+</script>
 <template>
-    <header></header>
-    <main>
+    <header class="header">
+        <TheHeader />
+    </header>
+    <main class="main">
         <slot></slot>
     </main>
-    <footer></footer>
+    <footer class="footer bg-body-secondary p-2">
+        <TheFooter />
+    </footer>
 </template>
 
 <style lang="scss" scoped></style>

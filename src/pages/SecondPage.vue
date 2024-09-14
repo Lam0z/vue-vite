@@ -1,10 +1,10 @@
 <script setup>
-import Home from "../components/Home.vue";
+import Second from "@/components/Second.vue";
 import TheLayout from "../components/TheLayout.vue";
 </script>
 
 <template>
     <the-layout>
-        <Home />
+        <Second />
     </the-layout>
 </template>
